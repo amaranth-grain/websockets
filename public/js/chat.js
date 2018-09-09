@@ -4,7 +4,6 @@ var socket = io.connect("http://christyyau.com");
 
 
 //DOM
-var keyInput = document.querySelc
 var msg = document.getElementById("msg");
 var username = document.getElementById("username");
 var send = document.getElementById("send");
