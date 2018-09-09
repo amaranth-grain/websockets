@@ -13,7 +13,7 @@ app.use(express.static("public"));
 //Set-up socket
 var io = socket(server);
 
-//Call this function when connection is establishied.
+//Call this function when connection is establisheed.
 io.on('connection', function(socket){
     console.log("Socket " + socket.id + " has established connection.");
 
@@ -22,7 +22,7 @@ io.on('connection', function(socket){
         io.sockets.emit("IM", data);
     });
 
-    //Handle feedback event
+    //Handle feedback event (x is typing...)
     socket.on("feedback", function(data){
         socket.broadcast("feedback", data);
     });
