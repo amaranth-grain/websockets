@@ -12,6 +12,10 @@ var output = document.getElementById("output");
 var feedback = document.getElementById("feedback");
 
 //Emit Events
+/*
+When enter key is pressed in the message window, emit message and
+feedback data to socket and reset the value to "".
+*/
 msg.addEventListener("keypress", function (e) {
     var key = e.which || e.keyCode;
     if (key === 13) {
@@ -25,7 +29,9 @@ msg.addEventListener("keypress", function (e) {
 
 });
 
-
+/* When 'Send' button is clicked, emit message and
+feedback data to socket and reset the value to "".
+ */
 send.addEventListener("click", function () {
     socket.emit("IM", {
         msg: msg.value,
@@ -37,11 +43,17 @@ send.addEventListener("click", function () {
 
 
 //Listening
+/*After receiving data from server, reset the feedback message and
+output the message that was typed to all clients.
+*/
 socket.on("IM", function (data) {
     feedback.innerHTML = "";
     output.innerHTML += "<p><strong>" + data.username + ":</strong> " + data.msg + "</p>";
 })
 
+/*After receivnig feedback data from server, broadcast "x is typing"
+to all clients except the typist.
+*/
 socket.on("feedback", function(data) {
     feedback.innerHTML = "<p><i>" + data + " is typing...</i></p>";
 });
